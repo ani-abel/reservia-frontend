@@ -1,0 +1,42 @@
+<main>
+  <h2 [ngClass]="['text-center', 'no-margin', 'app-title', 'index-title']">
+    PRIVACY POLICY
+  </h2>
+  <p [ngClass]="['title-p']">The type of personal data we collect</p>
+  <p>
+    <span [ngClass]="['blue-text']">RESERVIA</span> is an app for managing your
+    files locally. To be able to achieve this goal in the best way possible, we
+    need certain account permissions from our users. These include the
+    following:
+  </p>
+  <ul>
+    <li>
+      <span [ngClass]="['red-text']">Access to profile data</span><br />
+      This allows us to know who you are and gives us access to your basic
+      profile data from either
+      <span [ngClass]="['red-text-without-spacing']">DROPBOX</span> or
+      <span [ngClass]="['red-text-without-spacing']">GOOGLE</span>
+    </li>
+    <li>
+      <span [ngClass]="['red-text']">Access to files</span><br />
+      This allows us to display your files and allow you to manage those files
+      through our platform. It also allows you to manage your file's metadata
+      through <span [ngClass]="['blue-text']">RESERVIA</span>
+    </li>
+    <li>
+      <span [ngClass]="['red-text']">Downloading of files</span><br />
+      This permission allows you to download your files this app
+    </li>
+  </ul>
+
+  <p>
+    <b>NOTE</b>: If you choose to reject any of the above stated permissions,
+    you will <span [ngClass]="['red-text-without-spacing']">NOT</span> be able
+    to use this app. <span [ngClass]="['blue-text']">RESERVIA</span> does not
+    store your personal data.
+  </p>
+</main>
+
+<footer [ngClass]="['text-center', 'normal-footer']">
+  <a [routerLink]="['/home']">I AGREE AND CHOOSE TO PROCEED</a>
+</footer>

@@ -1,0 +1,17 @@
+<nav class="text-center">
+  <form
+    [formGroup]="searchForm"
+    (ngSubmit)="submitForm()"
+    action=""
+    class="no-margin no-padding"
+    id="open-search-modal"
+  >
+    <input
+      type="search"
+      [placeholder]="placeholderText"
+      spellcheck="false"
+      id="search-value"
+      [formControlName]="'searchedText'"
+    />
+  </form>
+</nav>

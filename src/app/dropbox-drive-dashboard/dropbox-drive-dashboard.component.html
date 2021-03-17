@@ -1,0 +1,92 @@
+<button
+  class="btn btn-danger floating-btn"
+  title="Create Folder"
+  (click)="openNewFolderModal()"
+  id="open-new-folder-modal"
+>
+  <span>Create Folder &nbsp;</span><i class="fa fa-folder-o"></i>
+</button>
+
+<app-loader *ngIf="isUploadHappening$ | async"></app-loader>
+
+<button
+  class="btn btn-primary middle-floating-btn"
+  title="Upload File"
+  (click)="openNewFileModal()"
+  id="open-new-file-modal"
+>
+  <span>Upload File &nbsp;</span><i class="fa fa-file-o"></i>
+</button>
+
+<button
+  appToggleSidebar
+  #ref="appToggleSidebar"
+  [cssClassOne]="'toggle-button-left'"
+  [cssClassTwo]="'toggle-button-left-collapse'"
+  class="btn btn-danger toggle-button toggle-button-left"
+  id="toggle-button"
+  title="Menu"
+>
+  <i class="fa fa-bars"></i>
+</button>
+
+<!-- Modals (Begins) -->
+<app-error-message-modal></app-error-message-modal>
+
+<app-success-message-modal></app-success-message-modal>
+
+<app-search-modal [searchModalPayload]="searchResults"></app-search-modal>
+
+<app-new-file-modal></app-new-file-modal>
+
+<app-new-folder-modal></app-new-folder-modal>
+
+<app-disk-storage-modal
+  [driveSpacePayload]="driveSpacePayload"
+></app-disk-storage-modal>
+<!-- Modals (Ends) -->
+
+<app-sidebar
+  (driveSpaceModal)="openDriveSpaceModal()"
+  [sidebarInput]="sidebarInputPayload"
+  [ngStyle]="{ display: ref.isOpen ? 'block' : 'none' }"
+></app-sidebar>
+<main class="dashboard-container">
+  <app-nav (searchModalOpen)="openSearchModal($event)"></app-nav>
+  <section class="dashboard-content">
+    <app-logo-section></app-logo-section>
+
+    <div class="file-list">
+      <h2>
+        <button
+          class="go-back-button cursor-pointer"
+          (click)="goback()"
+          [disabled]="(currentPathPointer$ | async) === '/'"
+        >
+          <i class="fa fa-chevron-circle-left"></i>
+        </button>
+        My Files
+      </h2>
+      <p class="file-dir">{{ currentPathPointer$ | async }}</p>
+      <div
+        class="files-list-container"
+        *ngIf="(filesOnPath$ | async)?.length > 0; else noFilesTemplate"
+      >
+        <span *ngFor="let file of filesOnPath$ | async">
+          <app-file-widget
+            [fileMetadata]="file"
+            *ngIf="file.Tag === 'file'; else displayFolderWidget"
+          ></app-file-widget>
+
+          <ng-template #displayFolderWidget>
+            <app-folder-widget [fileMetadata]="file"></app-folder-widget>
+          </ng-template>
+        </span>
+      </div>
+      <ng-template #noFilesTemplate>
+        <app-no-content-found></app-no-content-found>
+      </ng-template>
+    </div>
+  </section>
+  <app-footer></app-footer>
+</main>

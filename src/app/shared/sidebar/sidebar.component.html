@@ -1,0 +1,69 @@
+<aside id="sidebar" class="sidebar">
+  <div class="app-logo text-center">
+    <img
+      *ngIf="
+        (currentCloudProvider$ | async) === 'DROPBOX';
+        else defaultImageTemplate
+      "
+      src="../assets/images/dropbox-logo-3.png"
+      alt="Dropbox drive logo"
+      title="Dropbox Drive"
+    />
+    <ng-template #defaultImageTemplate>
+      <img
+        src="../assets/images/google-drive-logo.png"
+        alt="Google drive logo"
+        title="Google Drive"
+      />
+    </ng-template>
+  </div>
+  <ul class="no-margin no-padding nav-links">
+    <li title="Folders" class="nav-active-li">
+      <a class="cursor-pointer">
+        <i class="fa fa-folder-o"></i>
+      </a>
+    </li>
+    <li title="Drive information">
+      <a
+        id="open-cloud-disk-drive-modal"
+        class="cursor-pointer"
+        (click)="openDriveSpaceModal()"
+      >
+        <i class="fa fa-server"></i>
+      </a>
+    </li>
+    <li title="Recent Activity">
+      <a href="">
+        <i class="fa fa-bar-chart-o"></i>
+      </a>
+    </li>
+    <li
+      title="Empty Recycle Bin"
+      *ngIf="(currentCloudProvider$ | async) === 'GOOGLE'"
+    >
+      <a class="cursor-pointer" (click)="emptyRecycleBin()">
+        <i class="fa fa-trash"></i>
+      </a>
+    </li>
+    <li title="Logout">
+      <a [routerLink]="['/home']">
+        <i class="fa fa-power-off"></i>
+      </a>
+    </li>
+  </ul>
+  <div class="app-logo text-center">
+    <img
+      src="../assets/images/user_male.png"
+      [alt]="sidebarInput?.Username"
+      [title]="sidebarInput?.Username"
+      *ngIf="!sidebarInput?.ImagePath; else defaultTemplate"
+    />
+    <ng-template #defaultTemplate>
+      <img
+        [src]="sidebarInput?.ImagePath"
+        [alt]="sidebarInput?.Username"
+        [title]="sidebarInput?.Username"
+      />
+    </ng-template>
+  </div>
+</aside>

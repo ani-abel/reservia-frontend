@@ -1,0 +1,20 @@
+main {
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+main {
+  h2 {
+    font-size: 30px;
+    letter-spacing: 10px;
+    color: var(--bg-red);
+    text-shadow: 3px 3px var(--bg-nav-hover);
+  }
+
+  img {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+  }
+}
